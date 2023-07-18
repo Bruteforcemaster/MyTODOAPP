@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .login-form {
+        display: flexbox;
+        justify-content: center;
+        max-width: 400px;
+        margin: 4% auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: whitesmoke;
+    }
+
+    .login-form h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: blue;
+        text-decoration: underline;
+    }
+
+    .login-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .login-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .login-form .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .login-form .form-control:focus {
+        outline: none;
+        border-color: #777;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 10px;
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: medium;
+    }
+
+    .btn-login:hover {
+        background-color: black;
+    }
+
+    .flash-messages {
+        display: inline;
+        text-align: center;
+        list-style-type: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .flash-message {
+        font-size: large;
+        color: red;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<form method="post" class="login-form">
+    <h3 align="center">Sign up</h3>
+    <div class="form-group">
+        <label for="email">Email Address :</label>
+        <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email address" />
+        <br /><br />
+        <label for="username">User name :</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" />
+        <br /><br />
+        <label for="password1">Password :</label>
+        <input type="text" id="password1" name="password1" class="form-control" placeholder="Enter your password" />
+        <br /><br />
+        <label for="password2">Confirm Password :</label>
+        <input type="text" id="password2" name="password2" class="form-control" placeholder="Enter your password" />
+        <br /><br />
+        <button type="submit" class="btn-login">Enter</button>
+
+    </div>
+</form>
+{% with messages = get_flashed_messages() %} {% if messages %}
+<ul class="flash-messages">
+    {% for message in messages %}
+    <li class="flash-message">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} {% endwith %}
+{% endblock %}

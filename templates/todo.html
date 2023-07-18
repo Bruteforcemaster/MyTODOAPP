@@ -1,0 +1,181 @@
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<style>
+    .add-todo-form {
+        display: flexbox;
+        justify-content: center;
+        max-width: 400px;
+        margin: 1% auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: whitesmoke;
+    }
+
+    .add-todo-form h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: blue;
+        text-decoration: underline;
+    }
+
+    .add-todo-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .add-todo-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .add-todo-form .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .add-todo-form .form-control:focus {
+        outline: none;
+        border-color: #777;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 10px;
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: medium;
+    }
+
+    .btn-login:hover {
+        background-color: black;
+    }
+
+    .flash-messages {
+        list-style-type: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .flash-message {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        margin-left: 10%;
+        color: black;
+    }
+
+    h3 {
+        display: block;
+        text-align: center;
+        text-decoration: solid;
+        color: black;
+        font-size: large;
+        font-weight: 700;
+        font-family: sans-serif;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+        background-color: aliceblue;
+    }
+
+    th {
+        background-color: aliceblue;
+        font-weight: bold;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: aliceblue;
+    }
+
+    tbody tr:hover {
+        background-color: white;
+    }
+
+    .btn a {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn a:hover {
+        background-color: #0056b3;
+    }
+
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+{% endblock %} {% block title %}Todo list{% endblock %} {% block content %}
+<form method="POST" class="add-todo-form">
+    <h3 align="center">Add new todo</h3>
+    <div class="form-group">
+        <label for="title">Title :</label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Enter title of the todo" />
+        <br /><br />
+        <label for="descr">Description :</label>
+        <input type="text" id="descr" name="descr" class="form-control" placeholder="Enter description of the todo" />
+        <br /><br />
+        <button class="btn-login" type="submit">Add todo</button>
+    </div>
+</form>
+<br /><br />
+{% if alltodo|length==0 %}
+<div class="container">
+    <h3 class="no-record">No record add a new todo </h3>
+</div>
+{% else %}
+<div>
+    <h3>Todo List</h3>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">sno</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in alltodo %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.descr }}</td>
+                <td>{{ todo.date_time }}</td>
+                <td class="btn"><a href="/update/{{ todo.sno }}" type="submit">Update</a></td>
+                <td class="btn"><a href="/delete/{{ todo.sno }}" type="submit">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}
