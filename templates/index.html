@@ -3,45 +3,65 @@
 {% block title %}Home{% endblock %}
 
 {% block styles %}
-    {{ super() }}
-    <style>
-.home-quote {
-    box-sizing: border-box;
-    border: 2px solid brown;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background-color: aliceblue;
-}
+{{ super() }}
+<style>
+    .home-quote {
+        box-sizing: border-box;
+        border: 2px solid brown;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        background-color: aliceblue;
+    }
 
-.home-quote h3 {
-    
-    font-size: 45px;
-    color: black;
-    font-family: sans-serif;
-    font-weight: 700;
-}
+    .home-quote h3 {
 
-.home-quote p {
+        font-size: 45px;
+        color: black;
+        font-family: sans-serif;
+        font-weight: 700;
+    }
 
-    font-size: 25px;
-    color: black;
-    margin-top: 10px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-    </style>
+    .home-quote p {
+
+        font-size: 25px;
+        color: black;
+        margin-top: 10px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    /* Media Query for Mobile Devices */
+    @media only screen and (max-width: 600px) {
+        .home-quote {
+            width: 90%;
+            /* Adjust the width as needed for smaller screens */
+            padding: 10px;
+            /* Adjust the padding as needed for smaller screens */
+        }
+
+        .home-quote h3 {
+            font-size: 30px;
+            /* Adjust the font size as needed for smaller screens */
+        }
+
+        .home-quote p {
+            font-size: 18px;
+            /* Adjust the font size as needed for smaller screens */
+        }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-    <div class="home-quote">
-        <h3>Welcome to Todo List website</h3>
-        <br/><br/>
-        <p>Stay organized and productive with our intuitive and 
-            user-friendly platform. Easily manage your tasks, set deadlines, 
-            and track your progress. Experience a seamless and efficient way to stay
-            on top of your daily responsibilities. 
-            Start maximizing your productivity today!</p>
-    </div>
+<div class="home-quote">
+    <h3>Welcome to Todo List website</h3>
+    <br /><br />
+    <p>Stay organized and productive with our intuitive and
+        user-friendly platform. Easily manage your tasks, set deadlines,
+        and track your progress. Experience a seamless and efficient way to stay
+        on top of your daily responsibilities.
+        Start maximizing your productivity today!</p>
+</div>
 {% endblock %}

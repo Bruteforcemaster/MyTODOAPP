@@ -35,3 +35,17 @@ body,html{
     
 }
 
+/* Media Query for Mobile Devices */
+@media only screen and (max-width: 600px) {
+    .nav-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .nav-bar a {
+        margin: 1px; /* Adjust the margin as needed for decreased spacing */
+    }
+}
+

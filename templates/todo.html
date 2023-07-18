@@ -130,6 +130,41 @@
         justify-content: center;
         align-items: center;
     }
+
+    /* Media Query for Mobile Devices */
+    @media only screen and (max-width: 600px) {
+        .add-todo-form {
+            margin: 10% 5%;
+            padding: 10px;
+            max-width: none;
+        }
+
+        .add-todo-form h3 {
+            font-size: 20px;
+        }
+
+        .btn-login {
+            font-size: small;
+        }
+
+        table {
+            width: 90%;
+            margin-left: 5%;
+        }
+
+        h3 {
+            font-size: medium;
+        }
+
+        th,
+        td {
+            padding: 8px;
+        }
+
+        .btn a {
+            padding: 6px 10px;
+        }
+    }
 </style>
 {% endblock %} {% block title %}Todo list{% endblock %} {% block content %}
 <form method="POST" class="add-todo-form">
@@ -155,10 +190,8 @@
     <table>
         <thead>
             <tr>
-                <th scope="col">sno</th>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
-                <th scope="col">Date</th>
                 <th scope="col">Update</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -166,10 +199,8 @@
         <tbody>
             {% for todo in alltodo %}
             <tr>
-                <th scope="row">{{ loop.index }}</th>
                 <td>{{ todo.title }}</td>
                 <td>{{ todo.descr }}</td>
-                <td>{{ todo.date_time }}</td>
                 <td class="btn"><a href="/update/{{ todo.sno }}" type="submit">Update</a></td>
                 <td class="btn"><a href="/delete/{{ todo.sno }}" type="submit">Delete</a></td>
             </tr>
