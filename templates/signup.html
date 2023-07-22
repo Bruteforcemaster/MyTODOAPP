@@ -60,22 +60,53 @@
     }
 
     .flash-messages {
-        display: inline;
-        text-align: center;
         list-style-type: none;
         padding: 0;
         margin: 10px 0;
     }
 
     .flash-message {
-        font-size: large;
-        color: red;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f8f8f8;
         margin-bottom: 10px;
     }
+
+    .flash-container {
+        position: fixed;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 400px; /* Adjust this value to control the width of the container */
+        z-index: 9999; /* Ensure it appears above other content */
+    }
+
+    /* Style for the flash messages */
+    .flashes {
+        list-style: none;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        animation: fadeOut 1s linear forwards;
+        animation-delay: 1s;
+    }
+
+    @keyframes fadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    /* Style for each individual flash message item */
+    .flashes li {
+        color: red;
+        font-size: large;
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+
     /* Media Query for Mobile Devices */
     @media only screen and (max-width: 600px) {
         .login-form {
@@ -91,7 +122,12 @@
         .btn-login {
             font-size: small;
         }
+        .flash-container {
+            max-width: 90%; /* Reduce the container width for smaller screens */
+            bottom: 23px; /* Adjust the vertical position for better visibility on mobile */
+        }
     }
+    
 </style>
 {% endblock %}
 
@@ -102,19 +138,32 @@
     <h3 align="center">Sign up</h3>
     <div class="form-group">
         <label for="email">Email Address :</label>
-        <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email address" />
+        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" />
         <br /><br />
         <label for="username">User name :</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" />
         <br /><br />
         <label for="password1">Password :</label>
-        <input type="text" id="password1" name="password1" class="form-control" placeholder="Enter your password" />
+        <input type="password" id="password1" name="password1" class="form-control" placeholder="Enter your password" />
         <br /><br />
         <label for="password2">Confirm Password :</label>
-        <input type="text" id="password2" name="password2" class="form-control" placeholder="Enter your password" />
+        <input type="password" id="password2" name="password2" class="form-control" placeholder="Enter your password" />
         <br /><br />
         <button type="submit" class="btn-login">Enter</button>
 
     </div>
 </form>
+
+<div class="flash-container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+</div>
 {% endblock %}

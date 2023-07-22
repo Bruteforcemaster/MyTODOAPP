@@ -151,11 +151,16 @@ def todo():
         descr = request.form.get('descr')
         uid = current_user.id 
 
-        new_record = Todo(title=title, descr=descr, uid=uid)
-        db.session.add(new_record)
-        db.session.commit()
-
-        return redirect(url_for('todo'))
+        if not title or not descr:
+            flash("Please add a title and description", category='error')
+            return redirect(url_for('todo'))
+        
+        else:
+            new_record = Todo(title=title, descr=descr, uid=uid)
+            db.session.add(new_record)
+            db.session.commit()
+            flash("Activity is added to the list", category='success')
+            return redirect(url_for('todo'))
     
     alltodo = Todo.query.filter_by(uid=current_user.id).all()  
     return render_template('todo.html', alltodo=alltodo)

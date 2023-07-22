@@ -70,6 +70,47 @@
         margin-bottom: 10px;
     }
 
+    .flash-container {
+        position: fixed;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 400px; /* Adjust this value to control the width of the container */
+        z-index: 9999; /* Ensure it appears above other content */
+    }
+
+    /* Style for the flash messages */
+    .flashes {
+        list-style: none;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        animation: fadeOut 1s linear forwards;
+        animation-delay: 1s;
+    }
+
+    @keyframes fadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    /* Style for each individual flash message item */
+    .flashes li {
+        color: red;
+        font-size: large;
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+
+    @media only screen and (max-width: 600px){
+        .flash-container {
+            max-width: 90%; /* Reduce the container width for smaller screens */
+            bottom: 23px; /* Adjust the vertical position for better visibility on mobile */
+        }
+    }
+
 </style>
 {% endblock %} {% block title %}Todo list{% endblock %} {% block content %}
 <form method="POST" class="add-todo-form">
@@ -84,4 +125,18 @@
         <button class="btn-login" type="submit">Update todo</button>
     </div>
 </form>
+
+<div class="flash-container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+</div>
+
 {% endblock %}

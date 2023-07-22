@@ -94,11 +94,16 @@
         text-align: center;
         border-bottom: 1px solid #ccc;
         background-color: aliceblue;
+        
     }
 
     th {
         background-color: aliceblue;
         font-weight: bold;
+    }
+
+    td {
+        word-wrap: break-word; /* Add word-wrap to wrap long strings */
     }
 
     tbody tr:nth-child(even) {
@@ -131,6 +136,55 @@
         align-items: center;
     }
 
+    .flash-messages {
+        list-style-type: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .flash-message {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+        margin-bottom: 10px;
+    }
+
+    .flash-container {
+        position: fixed;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 400px; /* Adjust this value to control the width of the container */
+        z-index: 9999; /* Ensure it appears above other content */
+    }
+
+    /* Style for the flash messages */
+    .flashes {
+        list-style: none;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        animation: fadeOut 1s linear forwards;
+        animation-delay: 1s;
+    }
+
+    @keyframes fadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    /* Style for each individual flash message item */
+    .flashes li {
+        color: red;
+        font-size: large;
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+
+
     /* Media Query for Mobile Devices */
     @media only screen and (max-width: 600px) {
         .add-todo-form {
@@ -148,8 +202,8 @@
         }
 
         table {
-            width: 90%;
-            margin-left: 5%;
+            width: 100%;
+            margin-left: 0%;
         }
 
         h3 {
@@ -159,10 +213,16 @@
         th,
         td {
             padding: 8px;
+            word-wrap: break-word;
         }
 
         .btn a {
             padding: 6px 10px;
+        }
+
+        .flash-container {
+            max-width: 90%; /* Reduce the container width for smaller screens */
+            bottom: 23px; /* Adjust the vertical position for better visibility on mobile */
         }
     }
 </style>
@@ -209,4 +269,18 @@
     </table>
 </div>
 {% endif %}
+
+<div class="flash-container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+</div>
+
 {% endblock %}
